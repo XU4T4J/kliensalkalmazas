@@ -1,4 +1,5 @@
 ﻿
+using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Marketing.PromotionQualifications;
 using Hotcakes.CommerceDTO.v1;
 using Hotcakes.CommerceDTO.v1.Catalog;
@@ -31,7 +32,7 @@ namespace RF_Kliensalkalmazás
             return proxy;
         }
 
-        
+        Dictionary<string, string> products = new Dictionary<string, string>();
         public Form1()
         {
             InitializeComponent();
@@ -40,7 +41,7 @@ namespace RF_Kliensalkalmazás
             api = apicall();
 
             ApiResponse<List<ProductDTO>> DTO = api.ProductsFindAll();
-            Dictionary<string, string> products = new Dictionary<string, string>();
+            
             for (int i = 0; i < 100; i++)
             {
                 string id = DTO.Content[i].Bvin.ToString();
@@ -54,25 +55,10 @@ namespace RF_Kliensalkalmazás
                 checkedListBoxProducts.Items.Add(ne);
             }
 
-            //int x = Convert.ToInt32(textBox1.Text);
 
-            List<string> selectedNames = new List<string>();
-
-            foreach (string sname in checkedListBoxProducts.SelectedItems) 
-            { 
-                selectedNames.Add(sname);
-            }
-            foreach (string nasde in selectedNames)
-            {
-                listBox1.Items.Add(nasde);
-            }
 
         }
-
-        private void checkedListBoxProducts_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -81,7 +67,7 @@ namespace RF_Kliensalkalmazás
         
         private void buttonUP_Click(object sender, EventArgs e)
         {
-            
+           
             
 
         }
@@ -97,6 +83,70 @@ namespace RF_Kliensalkalmazás
         {
             
         }
+        List<string> selectedIds = new List<string>();
+        private void checkedListBoxProducts_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            List<string> selectedNames = new List<string>();
+
+            string name = checkedListBoxProducts.Items[e.Index].ToString();
+
+            if (e.NewValue == CheckState.Checked)
+            {
+
+                if (!selectedNames.Contains(name))
+                {
+                    selectedNames.Add(name);
+
+                    if (products.ContainsValue(name))
+                    {
+                        selectedIds.Add(products.FirstOrDefault(x => x.Value == name).Key);
+
+                        listBox2.Items.Add(products.FirstOrDefault(x => x.Value == name).Key);
+                    }
+                }
+
+
+                if (!listBox1.Items.Contains(name))
+                {
+                    listBox1.Items.Add(name);
+                }
+            }
+            else if (e.NewValue == CheckState.Unchecked)
+            {
+
+                if (selectedNames.Contains(name))
+                {
+                    selectedNames.Remove(name);
+
+                    if (products.ContainsValue(name))
+                    {
+                        selectedIds.Remove(products.FirstOrDefault(x => x.Value == name).Key);
+
+                        listBox2.Items.Remove(products.FirstOrDefault(x => x.Value == name).Key);
+                    }
+                    
+
+                   
+ 
+                }
+                else
+                {
+                    MessageBox.Show("Fasz");
+                }
+
+
+                if (listBox1.Items.Contains(name))
+                {
+                    listBox1.Items.Remove(name);
+                }
+            }
+
+
+
+
+
+        }
+
     }
         
 }
