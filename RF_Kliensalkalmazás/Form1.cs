@@ -55,22 +55,24 @@ namespace RF_Kliensalkalmazás
                 checkedListBoxProducts.Items.Add(ne);
             }
 
+            //int x = Convert.ToInt32(textBox1.Text);
 
+            List<string> selectedNames = new List<string>();
 
         }
         
 
         private void Form1_Load(object sender, EventArgs e)
-        {
+            { 
             listatoltes();
-        }
+            }
         
         private void buttonUP_Click(object sender, EventArgs e)
-        {
+            {
            
             
 
-        }
+            }
 
 
         private void buttonDOWN_Click(object sender, EventArgs e)
@@ -81,7 +83,7 @@ namespace RF_Kliensalkalmazás
 
         public void listatoltes()
         {
-            
+
         }
         List<string> selectedIds = new List<string>();
         private void checkedListBoxProducts_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -98,45 +100,45 @@ namespace RF_Kliensalkalmazás
                     selectedNames.Add(name);
 
                     if (products.ContainsValue(name))
-                    {
+        {
                         selectedIds.Add(products.FirstOrDefault(x => x.Value == name).Key);
 
                         listBox2.Items.Add(products.FirstOrDefault(x => x.Value == name).Key);
-                    }
+        }
                 }
-
+        
 
                 if (!listBox1.Items.Contains(name))
-                {
+        {
                     listBox1.Items.Add(name);
                 }
             }
             else if (e.NewValue == CheckState.Unchecked)
             {
-
+            
                 if (selectedNames.Contains(name))
                 {
                     selectedNames.Remove(name);
-
+            
                     if (products.ContainsValue(name))
                     {
                         selectedIds.Remove(products.FirstOrDefault(x => x.Value == name).Key);
 
                         listBox2.Items.Remove(products.FirstOrDefault(x => x.Value == name).Key);
-                    }
-                    
+        }
+
 
                    
  
                 }
                 else
-                {
+        {
                     MessageBox.Show("Fasz");
-                }
+        }
 
 
                 if (listBox1.Items.Contains(name))
-                {
+        {
                     listBox1.Items.Remove(name);
                 }
             }
@@ -144,7 +146,7 @@ namespace RF_Kliensalkalmazás
 
 
 
-
+            
         }
 
     }
