@@ -37,11 +37,18 @@ namespace RF_Kliensalkalmazás
         {
             InitializeComponent();
 
+            apiadata();
 
+
+
+
+        }
+        public void apiadata(string searchText = null)
+        {
             api = apicall();
 
             ApiResponse<List<ProductDTO>> DTO = api.ProductsFindAll();
-            
+
             for (int i = 0; i < 100; i++)
             {
                 string id = DTO.Content[i].Bvin.ToString();
@@ -55,55 +62,59 @@ namespace RF_Kliensalkalmazás
                 checkedListBoxProducts.Items.Add(ne);
             }
 
-
-
         }
-        
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            listatoltes();
-        }
-        
         private void buttonUP_Click(object sender, EventArgs e)
         {
-           
-            
-
+            api = apicall();
+            int up = Convert.ToInt32(textBox1.Text);
+            foreach (var i in selectedIds)
+            {
+                var productId = i;
+                var product = api.ProductsFind(productId).Content;
+                var p = product.SitePrice;
+                product.SitePrice = Convert.ToInt32(p * (1 + Convert.ToDecimal(up)/100));
+                ApiResponse<ProductDTO> response = api.ProductsUpdate(product);
+            }
+            MessageBox.Show("Az árnövelés sikeres volt");
         }
 
 
         private void buttonDOWN_Click(object sender, EventArgs e)
         {
+            api = apicall();
             int down = Convert.ToInt32(textBox1.Text);
+            foreach (var i in selectedIds)
+            {
+                var productId = i;
+                var product = api.ProductsFind(productId).Content;
+                var p = product.SitePrice;
+                product.SitePrice = Convert.ToInt32(p * (1 - Convert.ToDecimal(down) / 100));
+                ApiResponse<ProductDTO> response = api.ProductsUpdate(product);
+            }
+            MessageBox.Show("Az árcsökkentés sikeres volt");
         }
 
 
-        public void listatoltes()
-        {
-            
-        }
+
         List<string> selectedIds = new List<string>();
+        List<string> selectedNames = new List<string>();
         private void checkedListBoxProducts_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            List<string> selectedNames = new List<string>();
+            
 
-            string name = checkedListBoxProducts.Items[e.Index].ToString();
-
+            string name = checkedListBoxProducts.SelectedItem.ToString();
+            string id = products.FirstOrDefault(x => x.Value == name).Key;
             if (e.NewValue == CheckState.Checked)
             {
 
                 if (!selectedNames.Contains(name))
                 {
                     selectedNames.Add(name);
-
-                    if (products.ContainsValue(name))
-                    {
-                        selectedIds.Add(products.FirstOrDefault(x => x.Value == name).Key);
-
-                        listBox2.Items.Add(products.FirstOrDefault(x => x.Value == name).Key);
-                    }
+                    selectedIds.Add(id);
                 }
+                else 
+                { MessageBox.Show("Betöltés hiba"); }
 
 
                 if (!listBox1.Items.Contains(name))
@@ -111,37 +122,25 @@ namespace RF_Kliensalkalmazás
                     listBox1.Items.Add(name);
                 }
             }
-            else if (e.NewValue == CheckState.Unchecked)
-            {
+            //else if (e.NewValue == CheckState.Unchecked)
+            //{
 
-                if (selectedNames.Contains(name))
-                {
-                    selectedNames.Remove(name);
-
-                    if (products.ContainsValue(name))
-                    {
-                        selectedIds.Remove(products.FirstOrDefault(x => x.Value == name).Key);
-
-                        listBox2.Items.Remove(products.FirstOrDefault(x => x.Value == name).Key);
-                    }
-                    
-
-                   
- 
-                }
-                else
-                {
-                    MessageBox.Show("Fasz");
-                }
+            //    if (selectedNames.Contains(name))
+            //    {
+            //        selectedNames.Remove(name);
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Remove hiba");
+            //    }
 
 
-                if (listBox1.Items.Contains(name))
-                {
-                    listBox1.Items.Remove(name);
-                }
-            }
-
-
+            //    if (listBox1.Items.Contains(name))
+            //    {
+            //        listBox1.Items.Remove(name);
+            //    }
+            //}
+           
 
 
 
