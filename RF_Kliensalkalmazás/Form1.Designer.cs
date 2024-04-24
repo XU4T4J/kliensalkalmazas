@@ -119,14 +119,13 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.CheckedListBox checkedListBoxProducts;
-        private System.Windows.Forms.Button buttonDOWN;
-        private System.Windows.Forms.Button buttonUP;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListBox listBox2;
+        public System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.Button buttonDOWN;
+        public System.Windows.Forms.Button buttonUP;
+        public System.Windows.Forms.CheckedListBox checkedListBoxProducts;
+        public System.Windows.Forms.ListBox listBox1;
+        public System.Windows.Forms.ListBox listBox2;
     }
 }
 

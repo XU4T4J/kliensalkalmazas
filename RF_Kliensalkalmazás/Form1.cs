@@ -22,7 +22,7 @@ namespace RF_Kliensalkalmazás
 {
     public partial class Form1 : Form
     {
-        private Api api;
+        public Api api;
         public static Api apicall()
         {
             string apiUrl = "http://20.234.113.211:8095/";
@@ -32,7 +32,7 @@ namespace RF_Kliensalkalmazás
             return proxy;
         }
 
-        Dictionary<string, string> products = new Dictionary<string, string>();
+        public Dictionary<string, string> products = new Dictionary<string, string>();
         public Form1()
         {
             InitializeComponent();
@@ -62,12 +62,12 @@ namespace RF_Kliensalkalmazás
         }
         
 
-        private void Form1_Load(object sender, EventArgs e)
+        public void Form1_Load(object sender, EventArgs e)
             { 
             listatoltes();
             }
         
-        private void buttonUP_Click(object sender, EventArgs e)
+        public void buttonUP_Click(object sender, EventArgs e)
             {
            
             
@@ -75,7 +75,7 @@ namespace RF_Kliensalkalmazás
             }
 
 
-        private void buttonDOWN_Click(object sender, EventArgs e)
+        public void buttonDOWN_Click(object sender, EventArgs e)
         {
             int down = Convert.ToInt32(textBox1.Text);
         }
@@ -85,8 +85,9 @@ namespace RF_Kliensalkalmazás
         {
 
         }
-        List<string> selectedIds = new List<string>();
-        private void checkedListBoxProducts_ItemCheck(object sender, ItemCheckEventArgs e)
+        public List<string> selectedIds = new List<string>();
+
+        public void checkedListBoxProducts_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             List<string> selectedNames = new List<string>();
 
