@@ -34,32 +34,28 @@ namespace RF_Kliensalkalmazás
 
         public Dictionary<string, string> products = new Dictionary<string, string>();
         public Form1()
-        {
-            InitializeComponent();
+{
+    InitializeComponent();
 
+    api = apicall();
 
-            api = apicall();
+    ApiResponse<List<ProductDTO>> DTO = api.ProductsFindAll();
 
-            ApiResponse<List<ProductDTO>> DTO = api.ProductsFindAll();
-            
-            for (int i = 0; i < 100; i++)
-            {
-                string id = DTO.Content[i].Bvin.ToString();
-                string name = DTO.Content[i].ProductName.ToString();
+    for (int i = 0; i < 100; i++)
+    {
+        string id = DTO.Content[i].Bvin.ToString();
+        string name = DTO.Content[i].ProductName.ToString();
 
-                products.Add(id, name);
-            }
+        products.Add(id, name);
+    }
 
-            foreach (string ne in products.Values)
-            {
-                checkedListBoxProducts.Items.Add(ne);
-            }
+    foreach (string ne in products.Values)
+    {
+        checkedListBoxProducts.Items.Add(ne);
+    }
 
-            //int x = Convert.ToInt32(textBox1.Text);
-
-            List<string> selectedNames = new List<string>();
-
-        }
+    List<string> selectedNames = new List<string>();
+}
         
 
         public void Form1_Load(object sender, EventArgs e)
