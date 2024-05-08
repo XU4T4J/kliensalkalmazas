@@ -76,7 +76,7 @@ namespace RF_Kliensalkalmazás
                 product.SitePrice = Convert.ToInt32(p * (1 + Convert.ToDecimal(up)/100));
                 ApiResponse<ProductDTO> response = api.ProductsUpdate(product);
             }
-            MessageBox.Show("Az árnövelés sikeres volt");
+            MessageBox.Show("Az árnövelés sikeres volt!");
         }
 
 
