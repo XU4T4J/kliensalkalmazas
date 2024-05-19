@@ -122,25 +122,26 @@ namespace RF_Kliensalkalmazás
                     listBox1.Items.Add(name);
                 }
             }
-            //else if (e.NewValue == CheckState.Unchecked)
-            //{
+            else if (e.NewValue == CheckState.Unchecked)
+            {
 
-            //    if (selectedNames.Contains(name))
-            //    {
-            //        selectedNames.Remove(name);
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Remove hiba");
-            //    }
+                if (selectedNames.Contains(name))
+                {
+                    selectedNames.Remove(name);
+                    selectedIds.Remove(id);
+                }
+                else
+                {
+                    MessageBox.Show("Remove hiba");
+                }
 
 
-            //    if (listBox1.Items.Contains(name))
-            //    {
-            //        listBox1.Items.Remove(name);
-            //    }
-            //}
-           
+                if (listBox1.Items.Contains(name))
+                {
+                    listBox1.Items.Remove(name);
+                }
+            }
+
 
 
 
