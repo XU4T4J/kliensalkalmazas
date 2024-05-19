@@ -15,6 +15,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -92,7 +93,18 @@ namespace RF_Kliensalkalmazás
                 product.SitePrice = Convert.ToInt32(p * (1 - Convert.ToDecimal(down) / 100));
                 ApiResponse<ProductDTO> response = api.ProductsUpdate(product);
             }
-            MessageBox.Show("Az árcsökkentés sikeres volt");
+
+            List<ProductDTO> new_product_list = new List<ProductDTO>();
+
+            foreach (var i in selectedIds)
+            { 
+                var updated_prod = api.ProductsFind(i).Content;
+                new_product_list.Add(updated_prod);
+
+            }
+            dataGridView1.DataSource = new_product_list.ToList();
+
+            // MessageBox.Show("Az árcsökkentés sikeres volt");
         }
 
 
@@ -147,6 +159,25 @@ namespace RF_Kliensalkalmazás
 
         }
 
+        private void textBox1_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(textBox1, "");
+        }
+
+        private void textBox1_Validating(object sender, CancelEventArgs e)
+        {
+            if (!CheckPrec(textBox1.Text))
+            {
+                e.Cancel = true;
+                errorProvider1.SetError(textBox1, "Csak 5 és 90 közti számot adhatsz meg");
+            }
+        }
+
+        private bool CheckPrec(string prec)
+        {
+            Regex r = new Regex("^(5|[6-9]|[1-8][0-9]|90)$");
+            return r.IsMatch(prec);
+        }
     }
         
 }
