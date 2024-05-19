@@ -104,7 +104,7 @@ namespace RF_Kliensalkalmazás
             }
             dataGridView1.DataSource = new_product_list.ToList();
 
-            // MessageBox.Show("Az árcsökkentés sikeres volt");
+            MessageBox.Show("Az árcsökkentés sikeres volt");
         }
 
 
