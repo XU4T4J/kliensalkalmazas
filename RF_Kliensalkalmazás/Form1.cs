@@ -86,8 +86,7 @@ namespace RF_Kliensalkalmazás
 
             }
             dataGridView1.DataSource = new_product_list.ToList();
-            selectedNames.Clear();
-            selectedIds.Clear();
+
             MessageBox.Show("Az árnövelés sikeres volt!");
         }
 
@@ -114,8 +113,7 @@ namespace RF_Kliensalkalmazás
 
             }
             dataGridView1.DataSource = new_product_list.ToList();
-            selectedNames.Clear();
-            selectedIds.Clear();
+
             MessageBox.Show("Az árcsökkentés sikeres volt");
         }
 
