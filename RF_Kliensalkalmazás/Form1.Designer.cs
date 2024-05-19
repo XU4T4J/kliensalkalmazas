@@ -143,7 +143,7 @@
             this.Controls.Add(this.buttonDOWN);
             this.Controls.Add(this.checkedListBoxProducts);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Árazás";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

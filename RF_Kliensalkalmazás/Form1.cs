@@ -77,6 +77,17 @@ namespace RF_Kliensalkalmazás
                 product.SitePrice = Convert.ToInt32(p * (1 + Convert.ToDecimal(up)/100));
                 ApiResponse<ProductDTO> response = api.ProductsUpdate(product);
             }
+            List<ProductDTO> new_product_list = new List<ProductDTO>();
+
+            foreach (var i in selectedIds)
+            {
+                var updated_prod = api.ProductsFind(i).Content;
+                new_product_list.Add(updated_prod);
+
+            }
+            dataGridView1.DataSource = new_product_list.ToList();
+            selectedNames.Clear();
+            selectedIds.Clear();
             MessageBox.Show("Az árnövelés sikeres volt!");
         }
 
@@ -103,7 +114,8 @@ namespace RF_Kliensalkalmazás
 
             }
             dataGridView1.DataSource = new_product_list.ToList();
-
+            selectedNames.Clear();
+            selectedIds.Clear();
             MessageBox.Show("Az árcsökkentés sikeres volt");
         }
 
